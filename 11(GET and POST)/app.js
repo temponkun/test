@@ -1,0 +1,27 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}))
+
+app.get('/',(req,res)=>{
+res.sendFile(__dirname+'/index.html');
+});
+
+
+app.post("/login",(req,res)=>{
+let usr = req.body.username;
+let passw = req.body.password;
+if(usr==="admin" && passw==="admin"){
+res.send("Allowed");
+}
+else{
+res.send("Go away");
+}
+});
+
+app.listen(5000,()=>{
+console.log("App running on port 5000");
+});
